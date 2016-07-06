@@ -25,6 +25,13 @@ void Database_list();
 /* end macros */
 
 /* --- data structures ---*/
+
+/* Todo: Keep some data about the database */
+struct db_info {
+    int db_size;
+    int db_curr_pos;
+};
+
 struct Address {
     char strt;
     int id;
@@ -49,7 +56,7 @@ struct Connection *Database_open(const char *filename, char mode){
     if(!conn) die("Memory error");
     conn->db = malloc(sizeof(struct Database));
     if(!conn->db) die("Memory error");
-    /* conect file to database */
+    /* connect file to database */
     if(mode == 'c') {
         /* ToDo: database if exists get overwritten*/
         conn->file = fopen(filename, "w");
