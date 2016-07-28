@@ -2,10 +2,9 @@
 
 ctime -begin dbc.ctm
 
-REM set CommonCompilerFlags=-Od -MTd -nologo -fp:fast -fp:except- -Gm- -GR- -EHa- -Zo -Oi -W4 -wd4201 -wd4100 -wd4189 -wd4505 -wd4127 -wd4996 -wd4204 -FC -Z7
-set CommonCompilerFlags=-Od -nologo -fp:fast -fp:except- -Gm- -GR- -EHa- -Zo -Oi -W4 -wd4996 -wd4204 -Z7
-set CommonCompilerFlags=-DDEBUG=0 %CommonCompilerFlags%
-set CommonLinkerFlags= -incremental:no -opt:ref
+set CommonCompilerFlags=-Wall -Wextra -std=c99 -g
+set CommonCompilerFlags=-DDEBUG=1 %CommonCompilerFlags%
+set CommonLinkerFlags=
 
 REM TODO - can we just build both with one exe?
 
@@ -17,7 +16,7 @@ del *.pdb > NUL 2> NUL
 REM 64-bit build
 REM Optimization switches /wO2
 echo WAITING FOR PDB > lock.tmp
-cl %CommonCompilerFlags% ..\code\dbc.c -Fmwin32_dbc.map /link %CommonLinkerFlags%
+gcc %CommonCompilerFlags% ..\code\dbc.c %CommonLinkerFlags% -o ..\build\dbc_gcc.exe
 set LastError=%ERRORLEVEL%
 del lock.tmp
 popd

@@ -1,3 +1,6 @@
+#ifndef DBC_H_
+#define DBC_H_
+
 /* forward declarations test and logging*/
 void die();
 void log_msg();
@@ -15,8 +18,13 @@ void Database_set();
 void Database_get();
 void Database_delete();
 void Database_list();
-//void Process_action();
 /* end forward declarations db */
+
+#define MAX_DATA 32
+#define MAX_ROWS 1000
+
+#define RELEASE "0.1"
+#define REVISION ".1"
 
 /* macros */
 #define UNUSED(x) (void)(x)
@@ -27,6 +35,7 @@ void Database_list();
 /* --- data structures ---*/
 
 /* Todo: Keep some data about the database */
+
 struct db_info {
     int db_size;
     int db_curr_pos;
@@ -69,12 +78,8 @@ struct Connection *Database_open(const char *filename, char mode){
     if(!conn->file) die("Failed to open the file");
     return conn;
 }
+
 /* --- data structures ----*/
-
-/* end forward declarations process_action */
-void Process_action(char action, char *name, char *email, struct Connection *conn, int id);
-/* end forward declarations process_action */
-
 
 void die(const char *message){
     if(errno) {
@@ -132,7 +137,6 @@ void Database_write(struct Connection *conn){
     rewind(conn->file);
     /*printf("Database_write: Size of struct Database %I64u\n", sizeof(struct Database));*/
     printf("Database_write: Size of struct Database %lu\n", sizeof(struct Database));
-
     int rc = fwrite(conn->db, sizeof(struct Database), 1, conn->file);
     if(rc != 1) die("Failed to write database.");
     rc = fflush(conn->file);
@@ -224,3 +228,5 @@ void Process_action(char action, char *name, char *email, struct Connection *con
             die("Invalid action, only: c=create, g=get, s=set, d=del, l=list");
     }
 }
+
+#endif // DBC_H_
