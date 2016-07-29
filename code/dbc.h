@@ -26,6 +26,10 @@ void Database_list();
 #define RELEASE "0.1"
 #define REVISION ".1"
 
+// #define MYDEBUG 1
+// #define LOG 1
+#define TEST 1
+
 /* macros */
 #define UNUSED(x) (void)(x)
 #define NOTUSED(...) (void)(__VA_ARGS__)
@@ -188,9 +192,11 @@ void Database_delete(struct Connection *conn, int id){
 
 void Database_list(struct Connection *conn){
     struct Database *db = conn->db;
+    printf("--> Only printing first 20 elements <--\n");
     printf("ID \tname \tmail\n");
     printf("---------------------\n");
-    for(int i = 0; i < 10; i++) {
+    // TODO list only 10 elements, find out how big the database is
+    for(int i = 0; i < 20; i++) {
         /*struct Address *cur = &db->rows[i];
         if(cur->set) {
             Address_print(cur);

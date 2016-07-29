@@ -16,7 +16,7 @@ del *.pdb > NUL 2> NUL
 REM 64-bit build
 REM Optimization switches /wO2
 echo WAITING FOR PDB > lock.tmp
-gcc %CommonCompilerFlags% ..\code\dbc.c %CommonLinkerFlags% -o ..\build\dbc_gcc.exe
+gcc %CommonCompilerFlags% ..\code\dbc.c %CommonLinkerFlags% -o ..\build\dbc.exe
 set LastError=%ERRORLEVEL%
 del lock.tmp
 popd

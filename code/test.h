@@ -23,6 +23,7 @@ void test_setup(struct Connection *conn, int id){
 
 void test_teardown(struct Connection *conn){
         Database_write(conn);
+        Database_list(conn);
         Database_close(conn);
 }
 
@@ -37,12 +38,12 @@ void test_run(struct Connection *conn, int id, int runs){
     
     for (int i = 0; i < runs; i++){
         rnd_index = rand() % ARR_SIZE(name_arr) ;
-        printf ("Rnd nb: %d \n", rnd_index );
-        printf ("Now I choose %s \n", name_arr[rnd_index] );
-        printf ("Now I choose %s \n", email_arr[rnd_index] );
-        // ToDo: Tests if name array and semail array have the same length
-        //log_test("adding: %s - %s",name_arr[rnd_index],email_arr[rnd_index]);
-        log_test("adding stuff");
+        /*
+        if( ARR_SIZE(name_arr) != ARR_SIZE(email_arr) ){
+            die("Size mismatch in name and email array");
+            }*/
+        //printf("adding: %s - %s\n",name_arr[rnd_index],email_arr[rnd_index]);
+        log_test("Adding random shit to database ...");
         Process_action('s',name_arr[rnd_index],email_arr[rnd_index],conn,id++);
     }
 }

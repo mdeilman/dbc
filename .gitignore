@@ -63,3 +63,6 @@ dummy
 # cmake directories
 _build/
 build/
+
+build.bat
+build.sh
