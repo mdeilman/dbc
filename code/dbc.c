@@ -1,3 +1,12 @@
+/*
+baby rage: On Windows, format specifiers like "%llu" will not work for 64bit integers. To mitigate this problem, one has to use the __mingw_* versions instead or alternatively the __USE_MINGW_ANSI_STDIO macro. Not sure why this isn't turned on by default.
+
+found it on: https://sourceforge.net/p/mingw-w64/wiki2/gnu%20printf/
+
+*/
+
+#define __USE_MINGW_ANSI_STDIO 1
+
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
@@ -6,8 +15,6 @@
 
 #include "dbc.h"
 #include "test.h"
-
-
 
 int main(int argc, char *argv[]){
 

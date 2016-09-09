@@ -122,7 +122,8 @@ void Address_print(struct Address *addr){
 
 void Database_load(struct Connection *conn){
     /* printf("Database_load: Size of struct Database %I64u\n", sizeof(struct Database)); */
-    printf("Database_load: Size of struct Database %lu\n", sizeof(struct Database));
+    /*__mingw_printf("Database_load: Size of struct Database %llu\n", sizeof(struct Database));*/
+    printf("Database_load: Size of struct Database %llu\n", sizeof(struct Database));
     int rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
     if(rc != 1) die("Failed to load database.");
     log_msg("database load");
@@ -140,7 +141,8 @@ void Database_close(struct Connection *conn){
 void Database_write(struct Connection *conn){
     rewind(conn->file);
     /*printf("Database_write: Size of struct Database %I64u\n", sizeof(struct Database));*/
-    printf("Database_write: Size of struct Database %lu\n", sizeof(struct Database));
+    /*__mingw_printf("Database_write: Size of struct Database %llu\n", sizeof(struct Database));*/
+    printf("Database_write: Size of struct Database %llu\n", sizeof(struct Database));
     int rc = fwrite(conn->db, sizeof(struct Database), 1, conn->file);
     if(rc != 1) die("Failed to write database.");
     rc = fflush(conn->file);
