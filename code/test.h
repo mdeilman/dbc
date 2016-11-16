@@ -48,12 +48,15 @@ void test_run(struct Connection *conn, int id, int runs){
     }
 }
 
-void run_test(){
+void run_test(int nb_runs){
+    /* TODO: More extensive an flexible self test facility  */
+    if (nb_runs < 0){
+        nb_runs = 1;
+    }
     printf("Test: starting\n");
     char *testfile = "test.db";
     char action = 'c';
     char id = 0;
-    int nb_runs = 100;
     struct Connection *conn = Database_open(testfile, action);
     test_setup(conn,id);
     test_run(conn,id,nb_runs);

@@ -25,8 +25,10 @@ int main(int argc, char *argv[]){
    char action = 'x';
 
    if(argc == 1){
-      /* NO ARGS MEAN RUN TESTS */
-       run_test();
+       /* NO ARGS MEAN RUN TESTS */
+       /* TODO: Make number of tests more configurable */
+       int nb_tests = 1000;
+       run_test(nb_tests);
    }
    else if (argc < 3){
       die("USAGE: dbc <dbfile> <action> [action params]");

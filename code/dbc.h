@@ -38,7 +38,7 @@ void Database_list();
 
 /* --- data structures ---*/
 
-/* Todo: Keep some data about the database */
+/* TODO: Keep meta data about the database */
 
 struct db_info {
     int db_size;
@@ -71,7 +71,7 @@ struct Connection *Database_open(const char *filename, char mode){
     if(!conn->db) die("Memory error");
     /* connect file to database */
     if(mode == 'c') {
-        /* ToDo: database if exists get overwritten*/
+        /* TODO: Database if exists gets overwritten - handling */
         conn->file = fopen(filename, "w");
     } else {
         conn->file = fopen(filename, "r+");
@@ -124,7 +124,7 @@ void Database_load(struct Connection *conn){
     /* printf("Database_load: Size of struct Database %I64u\n", sizeof(struct Database)); */
     /*__mingw_printf("Database_load: Size of struct Database %llu\n", sizeof(struct Database));*/
     printf("Database_load: Size of struct Database %llu\n", sizeof(struct Database));
-    int rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
+    size_t rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
     if(rc != 1) die("Failed to load database.");
     log_msg("database load");
 }
@@ -143,7 +143,7 @@ void Database_write(struct Connection *conn){
     /*printf("Database_write: Size of struct Database %I64u\n", sizeof(struct Database));*/
     /*__mingw_printf("Database_write: Size of struct Database %llu\n", sizeof(struct Database));*/
     printf("Database_write: Size of struct Database %llu\n", sizeof(struct Database));
-    int rc = fwrite(conn->db, sizeof(struct Database), 1, conn->file);
+    size_t rc = fwrite(conn->db, sizeof(struct Database), 1, conn->file);
     if(rc != 1) die("Failed to write database.");
     rc = fflush(conn->file);
     if(rc == -1) die("Cannot flush database.");
@@ -197,7 +197,7 @@ void Database_list(struct Connection *conn){
     printf("--> Only printing first 20 elements <--\n");
     printf("ID \tname \tmail\n");
     printf("---------------------\n");
-    // TODO list only 10 elements, find out how big the database is
+    /* TODO: List only 10 elements, find out how big the database is */
     for(int i = 0; i < 20; i++) {
         /*struct Address *cur = &db->rows[i];
         if(cur->set) {
