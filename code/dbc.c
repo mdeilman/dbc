@@ -38,15 +38,19 @@ int main(int argc, char *argv[]){
    action = argv[2][0];
    char *name = argv[4];
    char *email = argv[5];
+
    if(argc > 3){
       id = atoi(argv[3]);
    }
 
    if(id >= MAX_ROWS) die("There's not that many records.");
+
    FILE *file;
-   if (!(file = fopen(filename, "r")) && action == 'c') {
+   file = fopen(filename, "r");
+   if (!(file) && (action == 'c')) {
       die("File exists && create");
    }
+
    struct Connection *conn = Database_open(filename, action);
 
    Process_action(action, name, email, conn, id);

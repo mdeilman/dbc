@@ -24,7 +24,7 @@ void Database_list();
 #define MAX_ROWS 1000
 
 #define RELEASE "0.1"
-#define REVISION ".1"
+#define REVISION ".2"
 
 // #define MYDEBUG 1
 // #define LOG 1
