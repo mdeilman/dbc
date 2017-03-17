@@ -13,8 +13,8 @@ void test_2();
 
 #define ARR_SIZE(arr) ( sizeof((arr)) / sizeof((arr[0])) )
 
-char* name_arr[] = {"Peter", "Paul", "Mary", "Pipi", "Kaka", " ", "Mario", "Zed", "Paula"};
-char* email_arr[] = {"Peter@yahho.de", "Paul@gmx.de", "Mary@yahoo.de", "Pipi@microsoft.com", "Kaka@apple.com", " ", "Mario@nds.com", "Zed@empire.co.uk.", "Paula@goolge.com"};
+char* name_arr[] = {"Peter", "Paul", "Mary", "Pipi", "Kaka", "empty", "Mario", "Zed", "Paula"};
+char* email_arr[] = {"Peter@yahho.de", "Paul@gmx.de", "Mary@yahoo.de", "Pipi@microsoft.com", "Kaka@apple.com", "none", "Mario@nds.com", "Zed@empire.co.uk", "Paula@goolge.com"};
 
 
 void test_setup(struct Connection *conn, int id){
@@ -35,15 +35,14 @@ void test_run(struct Connection *conn, int id, int runs){
     srand((unsigned) time(&t));    
 
     log_test("Test 1");
-    
+    log_test("Adding random shit to database ...");   
     for (int i = 0; i < runs; i++){
         rnd_index = rand() % ARR_SIZE(name_arr) ;
         /*
         if( ARR_SIZE(name_arr) != ARR_SIZE(email_arr) ){
             die("Size mismatch in name and email array");
             }*/
-        //printf("adding: %s - %s\n",name_arr[rnd_index],email_arr[rnd_index]);
-        log_test("Adding random shit to database ...");
+        /*printf("adding set %d: %s - %s\n",i,name_arr[rnd_index],email_arr[rnd_index]);*/
         Process_action('s',name_arr[rnd_index],email_arr[rnd_index],conn,id++);
     }
 }

@@ -2,7 +2,7 @@
 
 ctime -begin dbc.ctm
 
-set CommonCompilerFlags=-Wall -Wextra -std=c99 -g
+set CommonCompilerFlags=-Wall -Wextra -std=c99 -g -Wno-sign-compare
 set CommonCompilerFlags=-DDEBUG=1 %CommonCompilerFlags%
 set CommonLinkerFlags=
 

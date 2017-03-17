@@ -1,6 +1,12 @@
 #ifndef DBC_H_
 #define DBC_H_
 
+/* Sorry I finally gave up on cl on Windows, no chance how to handle this consistent between compilers
+   and platforms) this is only for the two printf statements in Database_load and Database_write */
+#ifdef WIN32
+#pragma warning( disable : 4477 )
+#endif
+
 /* forward declarations test and logging*/
 void die();
 void log_msg();
@@ -21,7 +27,9 @@ void Database_list();
 /* end forward declarations db */
 
 #define MAX_DATA 32
-#define MAX_ROWS 1000
+
+/* TODO make the size dynamically allocatable */
+#define MAX_ROWS 10000
 
 #define RELEASE "0.1"
 #define REVISION ".2"
@@ -95,19 +103,19 @@ void die(const char *message){
 }
 
 void log_msg(const char *message){
-    #ifdef LOG
+#ifdef LOG
     printf("Log: %s\n", message);
-    #else
+#else
     UNUSED(message);
-    #endif
+#endif
 }
 
 void log_test(const char *message){
-    #ifdef TEST
+#ifdef TEST
     printf("Test: %s\n", message);
-    #else
+#else
     UNUSED(message);
-    #endif
+#endif
 }
 
 void stop_test(){
@@ -121,9 +129,8 @@ void Address_print(struct Address *addr){
 }
 
 void Database_load(struct Connection *conn){
-    /* printf("Database_load: Size of struct Database %I64u\n", sizeof(struct Database)); */
-    /*__mingw_printf("Database_load: Size of struct Database %llu\n", sizeof(struct Database));*/
-    printf("Database_load: Size of struct Database %llu\n", sizeof(struct Database));
+    /*printf("Database_load: Size of struct Database %d [KiloBytes]\n", (sizeof(struct Database))/1024);*/
+    printf("Database_load: Size of struct Database %llu [KiloBytes]\n", (sizeof(struct Database))/1024);
     size_t rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
     if(rc != 1) die("Failed to load database.");
     log_msg("database load");
@@ -140,9 +147,12 @@ void Database_close(struct Connection *conn){
 
 void Database_write(struct Connection *conn){
     rewind(conn->file);
-    /*printf("Database_write: Size of struct Database %I64u\n", sizeof(struct Database));*/
-    /*__mingw_printf("Database_write: Size of struct Database %llu\n", sizeof(struct Database));*/
-    printf("Database_write: Size of struct Database %llu\n", sizeof(struct Database));
+    /*
+    printf("Database_write: Size of struct Adress %d [Bytes]\n", (sizeof(struct Address)));
+    printf("Database_write: Size of struct Database %d [KiloBytes]\n", (sizeof(struct Database))/1024);
+    */
+    printf("Database_write: Size of struct Adress %llu [Bytes]\n", (sizeof(struct Address)));
+    printf("Database_write: Size of struct Database %llu [KiloBytes]\n", (sizeof(struct Database))/1024);
     size_t rc = fwrite(conn->db, sizeof(struct Database), 1, conn->file);
     if(rc != 1) die("Failed to write database.");
     rc = fflush(conn->file);
@@ -200,9 +210,9 @@ void Database_list(struct Connection *conn){
     /* TODO: List only 10 elements, find out how big the database is */
     for(int i = 0; i < 20; i++) {
         /*struct Address *cur = &db->rows[i];
-        if(cur->set) {
-            Address_print(cur);
-        }*/
+          if(cur->set) {
+          Address_print(cur);
+          }*/
         Address_print(&db->rows[i]);
     }
     log_msg("database list");
