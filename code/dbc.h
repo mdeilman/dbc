@@ -120,8 +120,6 @@ void log_test(const char *message){
 
 void stop_test(){
     puts("Test: finished");
-    puts("Bailing out ...");
-    exit(1);
 }
 
 void Address_print(struct Address *addr){

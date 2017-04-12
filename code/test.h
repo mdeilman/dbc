@@ -35,7 +35,7 @@ void test_run(struct Connection *conn, int id, int runs){
     srand((unsigned) time(&t));    
 
     log_test("Test 1");
-    log_test("Adding random shit to database ...");   
+    log_test("Adding random sets to database ...");   
     for (int i = 0; i < runs; i++){
         rnd_index = rand() % ARR_SIZE(name_arr) ;
         /*
@@ -47,7 +47,7 @@ void test_run(struct Connection *conn, int id, int runs){
     }
 }
 
-void run_test(int nb_runs){
+int run_test(int nb_runs){
     /* TODO: More extensive an flexible self test facility  */
     if (nb_runs < 0){
         nb_runs = 1;
@@ -61,7 +61,8 @@ void run_test(int nb_runs){
     test_run(conn,id,nb_runs);
     test_teardown(conn);
     stop_test();
-    printf("Test: finished\n");
+
+    return 0;
 }
 
 #endif // TEST_H_

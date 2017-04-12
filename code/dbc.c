@@ -31,6 +31,7 @@ int main(int argc, char *argv[]){
         /* TODO: Create a test parameter t ? */
         int nb_tests = 10000;
         run_test(nb_tests);
+        return 0;
     }
     else if (argc < 3){
         /* TODO: Need a better usage dialog */
@@ -46,7 +47,7 @@ int main(int argc, char *argv[]){
         id = atoi(argv[3]);
     }
 
-    if(id >= MAX_ROWS) die("There's not that many records.");
+    if(id >= MAX_ROWS) die("There's not that many records in the database.");
 
     FILE *file;
     file = fopen(filename, "r");
