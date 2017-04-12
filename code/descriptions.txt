@@ -1,3 +1,2 @@
 test_noargs
-	Example program is called without arguments so that default range
-	[0..9] is used.
+	DBC is called without arguments so that default range of tests is 1000 database entries.
