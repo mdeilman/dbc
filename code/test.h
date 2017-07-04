@@ -5,7 +5,7 @@
 #include<time.h>
 
 /* forward declarations test and logging*/
-void run_test();
+int run_test();
 void test_setup();
 void test_teardown();
 void test_1();
