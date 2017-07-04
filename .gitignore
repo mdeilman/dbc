@@ -64,6 +64,7 @@ dummy
 _build/
 build/
 scratch/
+coverage/
 
 build.bat
 build.sh

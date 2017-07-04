@@ -1,2 +1,0 @@
-test_noargs
-	DBC is called without arguments so that default range of tests is 1000 database entries.
