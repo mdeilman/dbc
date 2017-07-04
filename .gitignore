@@ -63,6 +63,13 @@ dummy
 # cmake directories
 _build/
 build/
+scratch/
 
 build.bat
 build.sh
+
+# Postscript files from Egypt
+*.ps
+
+# Stackdump
+*.stackdump
