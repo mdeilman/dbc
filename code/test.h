@@ -32,14 +32,14 @@ void test_run(struct Connection *conn, int id, int runs){
     time_t t;
 
     /* Intializes random number generator */
-    srand((unsigned) time(&t));    
+    srand((unsigned) time(&t));
 
     log_test("Test 1");
-    log_test("Adding random sets to database ...");   
+    log_test("Adding random sets to database ...");
     for (int i = 0; i < runs; i++){
         rnd_index = rand() % ARR_SIZE(name_arr) ;
         /*
-        if( ARR_SIZE(name_arr) != ARR_SIZE(email_arr) ){
+        if( ARR_SIZE(name_arr) != RR_SIZE(email_arr) ){
             die("Size mismatch in name and email array");
             }*/
         /*printf("adding set %d: %s - %s\n",i,name_arr[rnd_index],email_arr[rnd_index]);*/

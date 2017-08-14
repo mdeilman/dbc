@@ -1,6 +1,10 @@
 #ifndef DBC_H_
 #define DBC_H_
 
+/*
+FIXME: There is quite some code in this header which has to be put into *.c files
+*/
+
 /* Sorry I finally gave up on cl on Windows, no chance how to handle this consistent between compilers
    and platforms) this is only for the two printf statements in Database_load and Database_write */
 #ifdef WIN32
@@ -46,7 +50,7 @@ void Database_list();
 
 /* --- data structures ---*/
 
-/* TODO: Keep meta data about the database */
+/* FIXME: Keep meta data about the database */
 
 struct db_info {
     int db_size;
@@ -79,7 +83,7 @@ struct Connection *Database_open(const char *filename, char mode){
     if(!conn->db) die("Memory error");
     /* connect file to database */
     if(mode == 'c') {
-        /* TODO: Database if exists gets overwritten - handling */
+        /* FIXME: Database if exists gets overwritten - handling */
         conn->file = fopen(filename, "w");
     } else {
         conn->file = fopen(filename, "r+");
@@ -205,7 +209,7 @@ void Database_list(struct Connection *conn){
     printf("--> Only printing first 20 elements <--\n");
     printf("ID \tname \tmail\n");
     printf("---------------------\n");
-    /* TODO: List only 10 elements, find out how big the database is */
+    /* FIXME: List only 10 elements, find out how big the database is */
     for(int i = 0; i < 20; i++) {
         /*struct Address *cur = &db->rows[i];
           if(cur->set) {

@@ -6,7 +6,7 @@
 */
 
 #define __USE_MINGW_ANSI_STDIO 1
-
+/* FIXME: This what for ? */
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
