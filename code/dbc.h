@@ -17,7 +17,6 @@ void die(const char *message);
 void log_msg(const char *message);
 void log_test(const char *message);
 void stop_test();
-void Address_print(struct Address *addr);
 void Database_load(struct Connection *conn);
 void Database_close(struct Connection *conn);
 void Database_write(struct Connection *conn);
@@ -148,12 +147,15 @@ void Database_close(struct Connection *conn){
 
 void Database_write(struct Connection *conn){
   rewind(conn->file);
-  /*
+  // ToDo: remove ifdefs
+  #ifdef __DMC__
     printf("Database_write: Size of struct Adress %d [Bytes]\n", (sizeof(struct Address)));
     printf("Database_write: Size of struct Database %d [KiloBytes]\n", (sizeof(struct Database))/1024);
-  */
-  printf("Database_write: Size of struct Adress %llu [Bytes]\n", (sizeof(struct Address)));
-  printf("Database_write: Size of struct Database %llu [KiloBytes]\n", (sizeof(struct Database))/1024);
+  #endif
+  #ifdef __GNUC__
+    printf("Database_write: Size of struct Adress %llu [Bytes]\n", (sizeof(struct Address)));
+    printf("Database_write: Size of struct Database %llu [KiloBytes]\n", (sizeof(struct Database))/1024);
+  #endif
   size_t rc1 = fwrite(conn->db, sizeof(struct Database), 1, conn->file);
   if(rc1 != 1) die("Failed to write database.");
   size_t rc2 = fflush(conn->file);
@@ -168,9 +170,11 @@ void Database_create(struct Connection *conn){
    *  dbc.h(169) : Error: constant initializer expected
    */
   int zero = 0;
+  struct Address addr;
   for(int i = 0; i < MAX_ROWS; i++) {
     /* make a prototype to initialize it */
-    struct Address addr = {.id = i, .set = zero};
+    addr.id = i;
+    addr.set = zero;
     /* then just assign it */
     conn->db->rows[i] = addr;
   }
@@ -203,7 +207,10 @@ void Database_get(struct Connection *conn, int id){
 }
 
 void Database_delete(struct Connection *conn, int id){
-  struct Address addr = {.id = id, .set = 0};
+  int zero = 0;
+  struct Address addr;
+  addr.id = id;
+  addr.set = zero;
   conn->db->rows[id] = addr;
   log_msg("database delete");
 }

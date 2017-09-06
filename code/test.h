@@ -5,9 +5,11 @@
 #include<time.h>
 
 /* forward declarations test and logging*/
-int run_test();
-void test_setup();
-void test_teardown();
+void test_setup(struct Connection *conn, int id);
+void test_teardown(struct Connection *conn);
+void test_run(struct Connection *conn, int id, int runs);
+int run_test(int nb_runs);
+
 void test_1();
 void test_2();
 

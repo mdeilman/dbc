@@ -74,3 +74,6 @@ build.sh
 
 # Stackdump
 *.stackdump
+
+# Map files
+*.map
