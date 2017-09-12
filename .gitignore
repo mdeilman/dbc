@@ -77,3 +77,6 @@ build.sh
 
 # Map files
 *.map
+
+# Test files
+test.db
