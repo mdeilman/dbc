@@ -80,7 +80,7 @@ struct Connection *Database_open(const char *filename, char mode){
   conn->db = malloc(sizeof(struct Database));
   if(!conn->db) die("Memory error");
   /* connect file to database */
-  if(mode == 'c') {
+  if( 'c' == mode ) {
     /* FIXME: Database if exists gets overwritten - handling */
     conn->file = fopen(filename, "w");
   } else {
@@ -132,7 +132,7 @@ void Database_load(struct Connection *conn){
   /*printf("Database_load: Size of struct Database %d [KiloBytes]\n", (sizeof(struct Database))/1024);*/
   printf("Database_load: Size of struct Database %llu [KiloBytes]\n", (sizeof(struct Database))/1024);
   size_t rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
-  if(rc != 1) die("Failed to load database.");
+  if( 1 != rc) die("Failed to load database.");
   log_msg("database load");
 }
 
@@ -164,8 +164,8 @@ void Database_write(struct Connection *conn){
 }
 
 void Database_create(struct Connection *conn){
-  /* 
-   *  ToDo: DMC complains about - dmc dbc.c - need fix
+  /*
+   *  TODO: DMC complains about - dmc dbc.c - need fix
    *  struct Address addr = {.id = i, .set = zero};
    *  dbc.h(169) : Error: constant initializer expected
    */
